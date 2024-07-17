@@ -1,5 +1,4 @@
 function message_error(obj){
-    console.log(obj)
     var html = "<ul>";
     $.each(obj,function(key, value){
         if (Array.isArray(value)) {

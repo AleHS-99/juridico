@@ -40,10 +40,7 @@ class addTcontrato(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Añadir tipo de Contrato'
-        context['entity']='TipoContrato'
-        context['m_confirm']='el tipo de contrato'
         context['list_url']=reverse_lazy('t_contrato')
-        context['form_url']=reverse_lazy('add_t_contrato')
         context['action']='add'
         return context
 
@@ -84,8 +81,6 @@ class updateTcontrato(UpdateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Editar tipo de Contrato'
-        context['entity']='TipoContrato'
-        context['m_confirm']='el tipo de contrato'
         context['list_url']=reverse_lazy('t_contrato')
         context['action']='edit'
         return context
