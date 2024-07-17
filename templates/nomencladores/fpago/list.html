@@ -1,0 +1,22 @@
+{% extends "list_base.html" %}
+
+{% block href %}href="{% url 'add_f_pago' %}"{% endblock href %}
+
+{% block header %}
+<tr>
+    <td>Forma de Pago</td>
+    <td>Opciones</td>
+</tr>
+{% endblock header %}
+
+{% block tbody %}
+{% for i in object_list %}
+<tr>
+    <td>{{ i.f_pago }}</td>
+    <td>
+        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_f_pago' i.id %}"><i class="fas fa-edit"></i></a>
+        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_f_pago' i.id %}"><i class="fas fa-trash"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock tbody %}
