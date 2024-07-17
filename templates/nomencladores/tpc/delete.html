@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+
+<br>
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <form method="post">
+                {% csrf_token %}
+                <div class="card card-default">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-trash"></i> {{ title }}
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                                <h5><i class="icon fas fa-ban"></i>Ha ocurrido un error al guardar el registro</h5>
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+
+                        <p>{{ mensaje }}</p>
+                        <input type="hidden" class="action" name="action" value="{{ action }}">
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-danger btn-flat btnTest">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                        <a href="{{ list_url }}" class="btn btn-warning">
+                            <i class="fas fa-times"></i> Cancelar
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+
+{% endblock scripts %}

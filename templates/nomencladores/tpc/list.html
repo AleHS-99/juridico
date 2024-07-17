@@ -1,0 +1,22 @@
+{% extends "list_base.html" %}
+
+{% block href %}href="{% url 'add_t_contrato' %}"{% endblock href %}
+
+{% block header %}
+<tr>
+    <td>Tipo de Contrato</td>
+    <td>Opciones</td>
+</tr>
+{% endblock header %}
+
+{% block tbody %}
+{% for i in object_list %}
+<tr>
+    <td>{{ i.t_contrato }}</td>
+    <td>
+        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_t_contrato' i.id %}"><i class="fas fa-edit"></i></a>
+        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_t_contrato' i.id %}"><i class="fas fa-trash"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock tbody %}
