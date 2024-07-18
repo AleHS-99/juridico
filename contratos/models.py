@@ -13,6 +13,7 @@ class contratos(models.Model):
     obj_contrato = models.CharField(max_length=500,blank=False,null=False, verbose_name="Objeto del Contrato")
     dictamen = models.CharField(max_length=200,verbose_name="Dictamen")
     f_pago = models.ForeignKey(forma_pago,on_delete=models.CASCADE,verbose_name="Forma de Pago")
+    departamento = models.ForeignKey(departamentos,on_delete=models.CASCADE, verbose_name="Departamento")
     fecha_ini = models.DateField(verbose_name="Fecha de Firma del Contrato")
     fecha_fin = models.DateField(verbose_name="Fecha de Vencimiento del Contrato")
     observaciones = models.TextField(verbose_name="Observaciones", blank=True, null=True)
