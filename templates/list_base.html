@@ -5,6 +5,10 @@
     <link rel="stylesheet" href="{% static 'plugins/datatables-bs4/css/dataTables.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/datatables-responsive/css/responsive.bootstrap4.min.css' %}">
     <link rel="stylesheet" href="{% static 'plugins/datatables-buttons/css/buttons.bootstrap4.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dataTables.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/searchPanes.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttons.dataTables.css' %}">
 {% endblock stylesheet %}
 
 {% block content %}
@@ -35,7 +39,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="example2" class="table table-bordered table-striped">
+                  <table id="example2" class="table table-bordered table-hover">
                     <thead>
                         {% block header %}
 
@@ -66,7 +70,7 @@
 
 {% block scripts %}
 <!-- jQuery -->
-<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
 <script src="{% static 'plugins/datatables/jquery.dataTables.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-responsive/js/dataTables.responsive.min.js' %}"></script>
@@ -76,8 +80,16 @@
 <script src="{% static 'plugins/datatables-buttons/js/buttons.html5.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.print.min.js' %}"></script>
 <script src="{% static 'plugins/datatables-buttons/js/buttons.colVis.min.js' %}"></script>
+<script src="{% static 'js/dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.searchPanes.js' %}"></script>
+<script src="{% static 'js/searchPanes.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.select.js' %}"></script>
+<script src="{% static 'js/select.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.buttons.js' %}"></script>
+<script src="{% static 'js/buttons.dataTables.js' %}"></script>
 <script>
     $(function () {
+      
       $('#example2').DataTable({
         "paging": true,
         "lengthChange": false,
@@ -85,7 +97,8 @@
         "ordering": true,
         "info": true,
         "autoWidth": false,
-        "responsive": true,
+        "select": true,
+        'serverside': false,
         language: {
           info: 'Mostrando página _PAGE_ de _PAGES_',
           search: 'Buscar',
@@ -96,8 +109,12 @@
             "next": "Siguiente",
             "previous": "Anterior"
           }
-        }
+        },
+        layout: {
+          top1: 'searchPanes',
+      }
       });
+      
     });
   </script>
 {% endblock scripts %}
