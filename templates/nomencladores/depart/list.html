@@ -1,6 +1,6 @@
 {% extends "list_base.html" %}
 
-{% block href %}href="{% url 'add_f_depart' %}"{% endblock href %}
+{% block href %}href="{% url 'add_depart' %}"{% endblock href %}
 
 {% block header %}
 <tr>
@@ -12,10 +12,10 @@
 {% block tbody %}
 {% for i in object_list %}
 <tr>
-    <td>{{ i.f_pago }}</td>
+    <td>{{ i.departamento }}</td>
     <td>
-        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_f_depart' i.id %}"><i class="fas fa-edit"></i></a>
-        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_f_depart' i.id %}"><i class="fas fa-trash"></i></a>
+        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_depart' i.id %}"><i class="fas fa-edit"></i></a>
+        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_depart' i.id %}"><i class="fas fa-trash"></i></a>
     </td>
 </tr>
 {% endfor %}

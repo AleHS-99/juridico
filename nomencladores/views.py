@@ -236,5 +236,91 @@ class listDepart(ListView):
         context = super().get_context_data(**kwargs)
         context['title'] = "Listado Departamentos"
         return context
+    
+class addDepart(CreateView):
+    model = departamentos
+    form_class = departForm
+    template_name = 'nomencladores/tpc/form.html'
+    success_url =reverse_lazy("list_depart")
+    
+    #@method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Añadir Departamento'
+        context['list_url']=reverse_lazy('list_depart')
+        context['form_url']=reverse_lazy('add_depart')
+        context['action']='add'
+        return context
 
+    def form_valid(self, form):
+        # Guarda el objeto
+        form.save()
+        # Redirige a la página deseada
+        return redirect(self.success_url)
+    
+    def post(self, request, *args,**kwargs):
+        data = {}
+        try:
+            action=request.POST['action']
+            if action=='add':
+                # form=CategoryForm(request.POST)
+                #asi es lo mismo que arriba, pero es mejor, en tal caso que se envien archivos, eso va en el request.FILES pero con el self.get_form() obtengo todo el formulario
+                form=self.get_form()
+                #ahi ya sobreescribi el metodo save
+                data = form.save()
+            else:
+                data['error']='No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error']=str(e)
+        
+        return JsonResponse(data)
 
+class updateDepart(UpdateView):
+    model = departamentos
+    form_class = departForm
+    template_name = 'nomencladores/tpc/form.html'
+    success_url =reverse_lazy("list_depart")
+    
+    #@method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Editar Departamento'
+        context['list_url']=reverse_lazy('list_depart')
+        context['action']='edit'
+        return context
+    
+    def post(self, request, *args,**kwargs):
+        data = {}
+        try:
+            action=request.POST['action']
+            if action=='edit':
+                # form=CategoryForm(request.POST)
+                #asi es lo mismo que arriba, pero es mejor, en tal caso que se envien archivos, eso va en el request.FILES pero con el self.get_form() obtengo todo el formulario
+                form=self.get_form()
+                #ahi ya sobreescribi el metodo save
+                data = form.save()
+            else:
+                data['error']='No ha ingresado a ninguna opción'
+        except Exception as e:
+            data['error']=str(e)
+        
+        return JsonResponse(data)
+
+class deleteDepart(DeleteView):
+    model = departamentos
+    template_name = 'nomencladores/tpc/delete.html'
+    success_url = reverse_lazy("list_depart")
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context ['mensaje'] = "Al borrar este Departamento, tambien se borraran los contratos que lo utilicen.\n ¿Estas seguro de querer eliminarlo?"
+        context['title'] = "Eliminación de Departamentos"
+        context['list_url']=reverse_lazy('list_depart')
+        return context   
