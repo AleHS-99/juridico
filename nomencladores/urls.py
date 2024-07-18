@@ -12,5 +12,8 @@ urlpatterns = [
     path("f_pago/edit/<int:pk>/",updatefPago.as_view(),name="edit_f_pago"),
     path("f_pago/delete//<int:pk>/",deletefPago.as_view(),name="delete_f_pago"),
         
-    path("f_depart/",fDepartView.as_view(),name="f_depart"),
+    path("depart/",listDepart.as_view(),name="list_depart"),
+    path("depart/add/",addDepart.as_view(),name="add_depart"),
+    path("depart/edit/<int:pk>/",updateDepart.as_view(),name="edit_depart"),
+    path("depart/delete//<int:pk>/",deleteDepart.as_view(),name="delete_depart"),
 ]

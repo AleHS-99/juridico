@@ -4,5 +4,5 @@ from nomencladores.models import departamentos
 def get_depas(request):
     depas = departamentos.objects.all()
     return {
-        'departamentos':depas
+        'departamentos_list':depas
     }
