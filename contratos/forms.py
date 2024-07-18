@@ -13,8 +13,8 @@ class contratoForm(ModelForm):
             'dictamen':TextInput(attrs={'placeholder':"Ingrese Dictamen"}),
             'f_pago':Select(),
             'departamento':Select(),
-            'fecha_ini':DateField(),
-            'fecha_fin':DateField(),
+            'fecha_ini':DateInput(attrs={'type': 'date'}),
+            'fecha_fin':DateInput(attrs={'type': 'date'}),
             'observaciones':Textarea(attrs={'placeholder':"Observaciones"}),
         }
         
