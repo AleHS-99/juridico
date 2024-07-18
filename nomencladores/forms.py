@@ -42,4 +42,22 @@ class fPagoForm(ModelForm):
         return data
 
 
-
+class departForm(ModelForm):
+    class Meta:
+        model = departamentos
+        fields ='__all__'
+        widgets={
+            'f_pago':TextInput(attrs={'placeholder':"Ingrese Departamento"})
+        }
+        
+    def save(self,commit=True):
+        data = {}
+        form = super()
+        try:
+            if form.is_valid():
+                form.save()
+            else:
+                data['error'] = form.errors
+        except Exception as e:
+            data['error'] = str(e)
+        return data

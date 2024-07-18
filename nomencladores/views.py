@@ -220,6 +220,21 @@ class deletefPago(DeleteView):
         return context
 
 
-
+class listDepart(ListView):
+    model = departamentos
+    template_name = 'nomencladores/depart/list.html'
+    
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args,**kwargs):
+        #esta funcion maneja como llegan los metodos de las peticiones
+        return super().dispatch(request, *args, **kwargs)
+    
+    def get_queryset(self):
+        return departamentos.objects.all()
+    
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['title'] = "Listado Departamentos"
+        return context
 
 
