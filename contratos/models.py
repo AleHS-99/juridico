@@ -2,7 +2,7 @@ from django.db import models
 from nomencladores.models import *
 
 # Create your models here.
-class contratos(models.Model):
+class contrato(models.Model):
     class Meta:
         verbose_name = 'Contrato'
         verbose_name_plural = 'Contrators'
