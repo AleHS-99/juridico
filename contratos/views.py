@@ -10,6 +10,7 @@ from .models import *
 from .forms import *
 # Create your views here.
 
-class listContrato(CreateView):
-    pass
+class listContrato(ListView):
+    model = contrato
+    template_name = 'contrato/list.html'
 

@@ -1,0 +1,40 @@
+{% extends "list_base.html" %}
+
+{% block href %}href="{% url 'add_t_contrato' %}"{% endblock href %}
+
+{% block header %}
+<tr>
+    <td>No.</td>
+    <td>Proveedor</td>
+    <td>Tipo</td>
+    <td>Objeto</td>
+    <td>Dictamen</td>
+    <td>Forma de Pago</td>
+    <td>Departamento</td>
+    <td>Fecha de Firma</td>
+    <td>Fecha de Vencimiento</td>
+    <td>Observaciones</td>
+    <td>Opciones</td>
+</tr>
+{% endblock header %}
+
+{% block tbody %}
+{% for i in object_list %}
+<tr>
+    <td>{{ i.no_contrato }}</td>
+    <td>{{ i.proveedor }}</td>
+    <td>{{ i.t_contrato }}</td>
+    <td>{{ i.obj_contrato }}</td>
+    <td>{{ i.dictamen }}</td>
+    <td>{{ i.f_pago }}</td>
+    <td>{{ i.departamento }}</td>
+    <td>{{ i.fecha_ini }}</td>
+    <td>{{ i.fecha_fin }}</td>
+    <td>{{ i.observaciones }}</td>
+    <td>
+        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_t_contrato' i.id %}"><i class="fas fa-edit"></i></a>
+        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_t_contrato' i.id %}"><i class="fas fa-trash"></i></a>
+    </td>
+</tr>
+{% endfor %}
+{% endblock tbody %}

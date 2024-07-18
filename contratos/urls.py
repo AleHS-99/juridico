@@ -3,5 +3,5 @@ from .views import *
 
 
 urlpatterns = [
-    #path('',HomeView.as_view(),name='Home'),
+    path('<int:pk>/',listContrato.as_view(),name='listContratoU'),
 ]
