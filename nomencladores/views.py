@@ -30,7 +30,7 @@ class tContratoView(ListView):
 class addTcontrato(CreateView):
     model = tipo_contrato
     form_class = tContratoForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("t_contrato")
     
     #@method_decorator(login_required)
@@ -70,7 +70,7 @@ class addTcontrato(CreateView):
 class updateTcontrato(UpdateView):
     model = tipo_contrato
     form_class = tContratoForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("t_contrato")
     
     #@method_decorator(login_required)
@@ -104,7 +104,7 @@ class updateTcontrato(UpdateView):
 
 class deleteTcontrato(DeleteView):
     model = tipo_contrato
-    template_name = 'nomencladores/tpc/delete.html'
+    template_name = 'globals/delete.html'
     success_url = reverse_lazy("t_contrato")
     
     def get_context_data(self, **kwargs):
@@ -134,7 +134,7 @@ class fPagoView(ListView):
 class addfPago(CreateView):
     model = forma_pago
     form_class = fPagoForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("t_contrato")
     
     #@method_decorator(login_required)
@@ -175,7 +175,7 @@ class addfPago(CreateView):
 class updatefPago(UpdateView):
     model = forma_pago
     form_class = fPagoForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("f_pago")
     
     #@method_decorator(login_required)
@@ -209,7 +209,7 @@ class updatefPago(UpdateView):
 
 class deletefPago(DeleteView):
     model = forma_pago
-    template_name = 'nomencladores/tpc/delete.html'
+    template_name = 'globals/delete.html'
     success_url = reverse_lazy("f_pago")
     
     def get_context_data(self, **kwargs):
@@ -240,7 +240,7 @@ class listDepart(ListView):
 class addDepart(CreateView):
     model = departamentos
     form_class = departForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("list_depart")
     
     #@method_decorator(login_required)
@@ -281,7 +281,7 @@ class addDepart(CreateView):
 class updateDepart(UpdateView):
     model = departamentos
     form_class = departForm
-    template_name = 'nomencladores/tpc/form.html'
+    template_name = 'globals/form.html'
     success_url =reverse_lazy("list_depart")
     
     #@method_decorator(login_required)
@@ -315,7 +315,7 @@ class updateDepart(UpdateView):
 
 class deleteDepart(DeleteView):
     model = departamentos
-    template_name = 'nomencladores/tpc/delete.html'
+    template_name = 'globals/delete.html'
     success_url = reverse_lazy("list_depart")
     
     def get_context_data(self, **kwargs):

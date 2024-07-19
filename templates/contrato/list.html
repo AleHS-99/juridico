@@ -1,4 +1,4 @@
-{% extends "list_base.html" %}
+{% extends "list_base_contrato.html" %}
 
 {% block href %}href="{% url 'addContratoU' depa_id %}"{% endblock href %}
 
@@ -22,8 +22,8 @@
     <td>{{ i.fecha_ini }}</td>
     <td>{{ i.fecha_fin }}</td>
     <td>
-        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'edit_t_contrato' i.id %}"><i class="fas fa-edit"></i></a>
-        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'delete_t_contrato' i.id %}"><i class="fas fa-trash"></i></a>
+        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'updateContratoU' i.id depa_id %}"><i class="fas fa-edit"></i></a>
+        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'deleteContratoU' i.id depa_id %}"><i class="fas fa-trash"></i></a>
     </td>
 </tr>
 {% endfor %}

@@ -11,7 +11,7 @@
 {% block content %}
 
 <div class="content-wrapper">
-  <br>
+    <br>
     <section class="content">
         <div class="container-fluid">
           <div class="row">
@@ -90,15 +90,17 @@
                   collapseMessage: 'Ocultar filtros',
                   showMessage: 'Mostrar filtros'
               }
-            }
-        }
+            },
+            
+        },
+        
     },
     columnDefs: [
         {
             searchPanes: {
                 show: true,
             },
-            targets: [0]
+            targets: [0, 1, 2, 3, 4]
         }
     ],
     language: {
