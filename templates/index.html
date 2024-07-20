@@ -1,9 +1,260 @@
 {% extends "base.html" %}
-{% block title%}Sistema Jur&iacute;dico{% endblock %}
+{% load static %}
+{% block title%}Sistema Jur&iacute;dico{% endblock title %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/dataTables.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/searchPanes.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/select.dataTables.css' %}">
+    <link rel="stylesheet" href="{% static 'css/buttons.dataTables.css' %}">
+{% endblock stylesheet %}
+
 {% block content %}
+<div class="content-wrapper">
+    <br>
+    <section class="content">
+        <div class="container-fluid">
+          <!-- Small boxes (Stat box) -->
+          <div class="row">
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                <div class="inner">
+                  <h3>{{ c_contratos }}</h3>
+  
+                  <p>Cantidad de Contratos</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-bag"></i>
+                </div>
+            </div>
+            
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-success">
+                <div class="inner">
+                  <h3>{{ ca_contratos }}</h3>
+  
+                  <p>Contratos Activos</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-stats-bars"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-warning">
+                <div class="inner">
+                  <h3>{{ cvm_contratos|length }}</h3>
+  
+                  <p>Vencen este Mes</p>
+                </div>
+                <div class="icon">
+                  <i class="ion ion-person-add"></i>
+                </div>
+              </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-danger">
+                <div class="inner">
+                  <h3>{{ cv_contratos|length }}</h3>
+                  <p>Vencidos</p>
+                </div>
+                </div>
+            </div>
+            <!-- ./col -->
+          </div>
+        </div>
+      </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                          <div class="container-fluid">
+                            <div class="row mb-2">
+                              <div class="col-sm-12">
+                                <h3>Listado de Contratos que vencen en en el mes</h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                          <table id="example2" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>No. Contrato</td>
+                                    <td>Proveedor</td>
+                                    <td>Tipo de Contrato</td>
+                                    <td>Fecha de Vencimiento</td>
+                                    <td>Opciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for i in cvm_contratos %}
+                                <tr>
+                                    <td>{{ i.no_contrato }}</td>
+                                    <td>{{ i.proveedor }}</td>
+                                    <td>{{ i.t_contrato }}</td>
+                                    <td>{{ i.fecha_fin }}</td>
+                                    <td>
+                                        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'updateContratoU' i.id depa_id %}"><i class="fas fa-edit"></i></a>
+                                        &nbsp;
+                                        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'deleteContratoU' i.id depa_id %}"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                          <div class="container-fluid">
+                            <div class="row mb-2">
+                              <div class="col-sm-12">
+                                <h3>Listado de Contratos vencidos</h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                          <table id="example3" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <td>No. Contrato</td>
+                                    <td>Proveedor</td>
+                                    <td>Tipo de Contrato</td>
+                                    <td>Fecha de Vencimiento</td>
+                                    <td>Opciones</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                              {% for i in cv_contratos %}
+                                <tr>
+                                    <td>{{ i.no_contrato }}</td>
+                                    <td>{{ i.proveedor }}</td>
+                                    <td>{{ i.t_contrato }}</td>
+                                    <td>{{ i.fecha_fin }}</td>
+                                    <td>
+                                        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'updateContratoU' i.id i.departamento.id %}"><i class="fas fa-edit"></i></a>
+                                        &nbsp;
+                                        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'deleteContratoU' i.id i.departamento.id %}"><i class="fas fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                          </table>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<div>
+{% endblock content %}
 
-{% endblock %}
 {% block scripts %}
+<script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'js/dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.searchPanes.js' %}"></script>
+<script src="{% static 'js/searchPanes.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.select.js' %}"></script>
+<script src="{% static 'js/select.dataTables.js' %}"></script>
+<script src="{% static 'js/dataTables.buttons.js' %}"></script>
+<script src="{% static 'js/buttons.dataTables.js' %}"></script>
+<script>
+    new DataTable('#example2', {
+      layout: {
+          top1: {
+              searchPanes: {
+                  layout: 'columns-5',
+                  initCollapsed: true,
+                  i18n: {
+                    title: {
+                      _: ' Filtros seleccionados -%d',
+                      0: 'Sin filtros seleccionados',
+                      1: '1 filtro seleccionado',
+                      count: '{total} encontrados',
+                      countfiltered: '{shown} ({total})',
+                      
+                    },
+                    clearMessage: 'Borrar filtros',
+                    collapseMessage: 'Ocultar filtros',
+                    showMessage: 'Mostrar filtros'
+                }
+              },
+              
+          },
+          
+      },
+      columnDefs: [
+          {
+              searchPanes: {
+                  show: true,
+              },
+              targets: [0, 1, 2, 3]
+          }
+      ],
+      language: {
+        url: "{% static 'spanish.json' %}"
+    },
+    lengthChange: false,
+    info: false,
+    searching:false
+  });
+  new DataTable('#example3', {
+    layout: {
+        top1: {
+            searchPanes: {
+                layout: 'columns-5',
+                initCollapsed: true,
+                i18n: {
+                  title: {
+                    _: ' Filtros seleccionados -%d',
+                    0: 'Sin filtros seleccionados',
+                    1: '1 filtro seleccionado',
+                    count: '{total} encontrados',
+                    countfiltered: '{shown} ({total})',
+                    
+                  },
+                  clearMessage: 'Borrar filtros',
+                  collapseMessage: 'Ocultar filtros',
+                  showMessage: 'Mostrar filtros'
+              }
+            },
+            
+        },
+        
+    },
+    columnDefs: [
+        {
+            searchPanes: {
+                show: true,
+            },
+            targets: [0, 1, 2, 3]
+        }
+    ],
+    language: {
+      url: "{% static 'spanish.json' %}"
+  },
+  lengthChange: false,
+  info: false,
+  searching:false
+});
+    </script>
 
-
-{% endblock %}
+{% endblock scripts %}
