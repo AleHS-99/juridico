@@ -22,4 +22,5 @@ urlpatterns = [
     path("",include("Home.urls")),
     path("Nomencladores/",include("nomencladores.urls")),
     path("Contratos/",include("contratos.urls")),
+    
 ]

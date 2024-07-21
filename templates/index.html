@@ -164,6 +164,59 @@
             </div>
         </div>
     </section>
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- PIE CHART -->
+            <div class="card card-danger">
+              <div class="card-header">
+                <h3 class="card-title">Gráfico de Pastel</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col (LEFT) -->
+          <div class="col-md-6">
+            <!-- BAR CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title">Gráfico de Barras</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="chart">
+                  <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+      </div>
+    </section>
 <div>
 {% endblock content %}
 
@@ -176,6 +229,7 @@
 <script src="{% static 'js/select.dataTables.js' %}"></script>
 <script src="{% static 'js/dataTables.buttons.js' %}"></script>
 <script src="{% static 'js/buttons.dataTables.js' %}"></script>
+<script src="{% static 'plugins/chart.js/Chart.min.js' %}"></script>
 <script>
     new DataTable('#example2', {
       layout: {
@@ -214,7 +268,8 @@
     },
     lengthChange: false,
     info: false,
-    searching:false
+    searching:false,
+    pageLength:5
   });
   new DataTable('#example3', {
     layout: {
@@ -253,8 +308,110 @@
   },
   lengthChange: false,
   info: false,
-  searching:false
+  searching:false,
+  pageLength:5
 });
+    //-------------
+    //- PIE CHART -
+    //-------------
+    // Get context with jQuery - using jQuery's .get() method.
+    var donutData        = {
+      labels: [
+          'Contratos',
+          'Activos',
+          'Vencen en este mes',
+          'Vencidos',
+      ],
+      datasets: [
+        {
+          data: [{{ c_contratos }},{{ ca_contratos }},{{ cvm_contratos|length }},{{ cv_contratos|length }}],
+          backgroundColor : ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+        }
+      ]
+    }
+    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')
+    var pieData        = donutData;
+    var pieOptions     = {
+      maintainAspectRatio : false,
+      responsive : true,
+    }
+    //Create pie or douhnut chart
+    // You can switch between pie and douhnut using the method below.
+    new Chart(pieChartCanvas, {
+      type: 'pie',
+      data: pieData,
+      options: pieOptions
+    });
+    async function fetchData() {
+      try {
+          const response = await fetch('{% url "bar_data" %}');
+          const data = await response.json();
+          var labels = [];
+          var activos = [];
+          var por_vencer =[];
+          var vencidos =[];
+          $.each(data,function(key, value){
+            labels.push(key);
+            activos.push(value[0]);
+            por_vencer.push(value[1]);
+            vencidos.push(value[2]);
+          });
+          var barChartCanvas = $('#barChart').get(0).getContext('2d')
+          
+          var barChartData = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Activos',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1,
+                    data: activos
+                },
+                {
+                    label: 'Por vencer',
+                    backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgba(255, 159, 64, 1)',
+                    borderWidth: 1,
+                    data: por_vencer
+                },
+                {
+                    label: 'Vencidos',
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    data: vencidos
+                }
+            ]
+        };
+        
+        var barChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+        
+        var myBarChart = new Chart(barChartCanvas, {
+            type: 'bar',
+            data: barChartData,
+            options: barChartOptions
+        });
+
+          
+      } catch (error) {
+          console.error('Error al obtener los datos:', error);
+      }
+  }
+
+  // Llama a fetchData cuando la página se carga
+  document.addEventListener('DOMContentLoaded', fetchData);
     </script>
 
 {% endblock scripts %}

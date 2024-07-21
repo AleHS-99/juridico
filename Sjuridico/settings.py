@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'Home',
     'nomencladores',
-    'contratos'
+    'contratos',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +133,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Cambiando formato de Fecha
 DATE_FORMAT = "d/m/Y"
 USE_L10N = False
+
+LOGIN_REDIRECT_URL = "Home"
+LOGOUT_REDIRECT_URL = 'login'
+
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True

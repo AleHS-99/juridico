@@ -1,0 +1,8 @@
+requieremnts
+django
+django-widget-tweaks
+django-auth-ldap
+
+
+Superusuario:
+admin	a12345678..
