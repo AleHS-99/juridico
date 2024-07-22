@@ -1,1 +1,15 @@
 {% extends "form_base.html" %}
+{% block scripts2 %}
+<script>
+    let url = window.location.pathname
+    if (url.indexOf("Nomencladores") !== -1){
+        var elemento = document.getElementById("nomen");
+        elemento.classList.add("menu-open");
+    }else if (url.indexOf("Contratos") !== -1) {
+        var elemento = document.getElementById("cont");
+        elemento.classList.add("menu-open");
+    } else {
+        // No hagas nada en otros casos
+    }
+</script>
+{% endblock scripts2 %}
