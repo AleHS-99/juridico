@@ -109,7 +109,7 @@ class deleteTcontrato(DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['mensaje'] = "Al borrar este tipo de contrato, tambien se borraran los contratos que lo utilicen.\n¿Estas seguro de querer eliminarlo?"
+        context ['mensaje'] = "¿Estas seguro de querer eliminarlo?"
         context['title'] = "Eliminación de un Tipo de Contrato"
         context['list_url']=reverse_lazy('t_contrato')
         return context
@@ -214,7 +214,7 @@ class deletefPago(DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['mensaje'] = "Al borrar esta forma de pago, tambien se borraran los contratos que lo utilicen.\n¿Estas seguro de querer eliminarlo?"
+        context ['mensaje'] = "¿Estas seguro de querer eliminarlo?"
         context['title'] = "Eliminación de una forma de pago"
         context['list_url']=reverse_lazy('f_pago')
         return context
@@ -320,7 +320,7 @@ class deleteDepart(DeleteView):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context ['mensaje'] = "Al borrar este Departamento, tambien se borraran los contratos que lo utilicen.\n ¿Estas seguro de querer eliminarlo?"
+        context ['mensaje'] = "¿Estas seguro de querer eliminarlo?"
         context['title'] = "Eliminación de Departamentos"
         context['list_url']=reverse_lazy('list_depart')
         return context   
