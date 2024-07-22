@@ -39,7 +39,7 @@ class addContrato(CreateView):
         self.departamento_id = self.kwargs.get('pk')
         return super().dispatch(request, *args, **kwargs)
     
-    def get_initial(self) -> dict[str, Any]:
+    def get_initial(self):
         initial = super().get_initial()
         initial['departamento'] = self.departamento_id
         return initial
