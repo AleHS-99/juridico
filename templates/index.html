@@ -77,7 +77,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header bg-warning">
                           <div class="container-fluid">
                             <div class="row mb-2">
                               <div class="col-sm-12">
@@ -120,7 +120,7 @@
                 </div>
                 <div class="col-6">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header bg-danger">
                           <div class="container-fluid">
                             <div class="row mb-2">
                               <div class="col-sm-12">
@@ -317,15 +317,14 @@
     // Get context with jQuery - using jQuery's .get() method.
     var donutData        = {
       labels: [
-          'Contratos',
           'Activos',
           'Vencen en este mes',
           'Vencidos',
       ],
       datasets: [
         {
-          data: [{{ c_contratos }},{{ ca_contratos }},{{ cvm_contratos|length }},{{ cv_contratos|length }}],
-          backgroundColor : ['#00c0ef', '#00a65a', '#f39c12', '#f56954'],
+          data: [{{ ca_contratos }},{{ cvm_contratos|length }},{{ cv_contratos|length }}],
+          backgroundColor : ['#00a65a', '#f39c12', '#f56954'],
         }
       ]
     }
