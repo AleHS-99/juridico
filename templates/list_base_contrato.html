@@ -71,35 +71,9 @@
 <script src="{% static 'js/dataTables.buttons.js' %}"></script>
 <script src="{% static 'js/buttons.dataTables.js' %}"></script>
 <script>
-  function parseFecha(fechaTexto) {
-    // Mapea los nombres de los meses a sus números correspondientes
-    const meses = {
-        enero: 0,
-        febrero: 1,
-        marzo: 2,
-        abril: 3,
-        mayo: 4,
-        junio: 5,
-        julio: 6,
-        agosto: 7,
-        septiembre: 8,
-        octubre: 9,
-        noviembre: 10,
-        diciembre: 11
-      };
-
-        // Divide la cadena de texto en partes (día, mes y año)
-        const partes = fechaTexto.split(" de ");
-        const dia = parseInt(partes[0], 10);
-        const mesTexto = partes[1];
-        const anio = parseInt(partes[2], 10);
-    
-        // Obtiene el número del mes a partir del texto
-        const mes = meses[mesTexto.toLowerCase()];
-    
-        // Crea una instancia de Date con los componentes extraídos
-        return new Date(anio, mes, dia);
-    }
+  function getLastDayOfMonth(year, month) {
+    return new Date(year, month + 1, 0);
+}
   new DataTable('#example2', {
     layout: {
         top1: {
@@ -140,13 +114,14 @@
   rowCallback: function(row, data, index) {
             var fechaVencimiento = parseFecha(data[4]); // Obtén la fecha de vencimiento desde la columna correspondiente (índice 4)
             var hoy = new Date(); // Obtiene la fecha actual
-
+            const lastDayThisMonth = getLastDayOfMonth(hoy.getFullYear(), hoy.getMonth());
+            
             if (hoy >= fechaVencimiento) {
               $(row).addClass('bg-danger color-palete'); // Cambia el color de fondo a rojo
             }
             
-            if (hoy > fechaVencimiento) {
-              $(row).addClass('bg-danger color-palete'); // Cambia el color de fondo a rojo
+            if((hoy > fechaVencimiento) && (hoy <=lastDayThisMonth)) {
+              $(row).addClass('bg-warning color-palete'); // Cambia el color de fondo a rojo
             }
             
         }
