@@ -144,6 +144,11 @@
             if (hoy >= fechaVencimiento) {
               $(row).addClass('bg-danger color-palete'); // Cambia el color de fondo a rojo
             }
+            
+            if (hoy > fechaVencimiento) {
+              $(row).addClass('bg-danger color-palete'); // Cambia el color de fondo a rojo
+            }
+            
         }
 });
   </script>
