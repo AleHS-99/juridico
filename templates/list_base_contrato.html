@@ -113,15 +113,13 @@
   lengthChange: false,
   searching:true,
   rowCallback: function(row, data, index) {
-            var fechaVencimiento = parseFecha(data[4]); // Obtén la fecha de vencimiento desde la columna correspondiente (índice 4)
+            var fechaVencimiento = new Date(data[4]); // Obtén la fecha de vencimiento desde la columna correspondiente (índice 4)
             var hoy = new Date(); // Obtiene la fecha actual
-            const lastDayThisMonth = getLastDayOfMonth(hoy.getFullYear(), hoy.getMonth());
-            
+            var lastDayThisMonth = getLastDayOfMonth(hoy.getFullYear(), hoy.getMonth());
+		console.log(fechaVencimiento)
             if (hoy >= fechaVencimiento) {
               $(row).addClass('bg-danger color-palete'); // Cambia el color de fondo a rojo
-            }
-            
-            if((hoy > fechaVencimiento) && (hoy <= lastDayThisMonth)) {
+            }else if (hoy > fechaVencimiento && hoy < lastDayThisMonth) {
               $(row).addClass('bg-warning color-palete'); // Cambia el color de fondo a rojo
             }
             

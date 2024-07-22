@@ -106,9 +106,9 @@
                                     <td>{{ i.t_contrato }}</td>
                                     <td>{{ i.fecha_fin }}</td>
                                     <td>
-                                        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'updateContratoU' i.id depa_id %}"><i class="fas fa-edit"></i></a>
+                                        <a type="button" class="btn btn-warning btn-xs btn-flat" href="{% url 'updateContratoU' i.id i.departamento.id %}"><i class="fas fa-edit"></i></a>
                                         &nbsp;
-                                        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'deleteContratoU' i.id depa_id %}"><i class="fas fa-trash"></i></a>
+                                        <a type="button" class="btn btn-danger btn-xs btn-flat" href="{% url 'deleteContratoU' i.id i.departamento.id %}"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                                 {% endfor %}
